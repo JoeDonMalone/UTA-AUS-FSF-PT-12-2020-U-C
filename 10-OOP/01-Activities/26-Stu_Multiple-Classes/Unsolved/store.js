@@ -25,7 +25,7 @@ class Store {
     this.stock.forEach((item) => {
       if (item.name === name) {
         // TODO: Increase the store's stock of item
-        item.name += item.stock;
+        item.name += item.count;
         console.log(`Replenished ${item.name} by ${item.count}`);
       }
     });
