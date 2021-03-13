@@ -36,6 +36,7 @@ app.get('/', (req, res) => {
 });
 
 // What does this route do?
+  // This returns all characters
 app.get('/api/characters', (req, res) => {
   return res.json(characters);
 });
