@@ -62,6 +62,14 @@ app.get("/populateduser", (req, res) => {
   // Write the query to grab the documents from the User collection,
   // and populate them with any associated Notes.
   // TIP: Check the models out to see how the Notes refers to the User
+  db.Note.find({})
+    .populate("notes")
+    .then(dbNote => {
+      res.json(dbNote);
+    })
+    .catch(err => {
+      res.json(err);
+    });
 });
 
 // Start the server

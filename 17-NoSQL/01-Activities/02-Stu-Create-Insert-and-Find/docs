@@ -1,0 +1,6 @@
+db.students.insert({
+            "name":"Joe",
+            "rownumber":"1",
+            "os":"Windows",
+            "hobbies":["poker","swimming"]
+            })

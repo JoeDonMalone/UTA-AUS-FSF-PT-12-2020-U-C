@@ -20,11 +20,23 @@ app.use(express.static("public"));
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/custommethoddb", { useNewUrlParser: true });
 
 // Routes
+//firstName lastName username password
 
 // Route to post our form submission to mongoDB via mongoose
-app.post("/submit", ({body}, res) => {
+app.post("/submit", ({ body }, res) => {
   // Create a new user using req.body
+  const user = new User(body);
+  user.setFullName();
+  console.log(user)
+  user.lastUpdateDate();
 
+  User.create(user)
+    .then(dbUser => {
+      res.json(dbUser);
+    })
+    .catch(err => {
+      res.json(err);
+    });
   // Update this route to run the `setFullName` and `lastUpdatedDate` methods before creating a new User
   // You must create these methods in the model.
 
