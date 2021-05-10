@@ -12,5 +12,10 @@
 </html>
 <script>
 
-// CODE HERE
+//create the database;
+const request = indexedDB.open('some-database-name', 1);
+
+request.onsuccess = event => {
+  console.log(request.result.name);
+}
 </script>

@@ -9,7 +9,17 @@
   <body>
     <h1>Open Your Developer Tools > Application > IndexedDB</h1>
     <script>
-    // CODE HERE
+    // Create the window Index DB storage object
+    const request = indexedDB.open('to-do-list', 1);
+    //create the object
+    request.onupgradeneeded = ({target}) => {
+      const db = target.result;
+      const objectStore = db.createObjectStore("list-one");
+    }
+
+    request.onsuccess = event => {
+      console.log(request.result);
+    }
     </script>
   </body>
 </html>

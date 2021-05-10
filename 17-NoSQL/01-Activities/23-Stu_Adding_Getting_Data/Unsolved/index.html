@@ -1,27 +1,42 @@
 <!DOCTYPE html>
 
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Adding and Getting Data</title>
-  </head>
 
-  <body>
-    <h1>Open Your Developer Tools > Application > IndexedDB</h1>
-    <script>
-      const request = window.indexedDB.open("toDoList", 1);
-      
-      request.onupgradeneeded = event => {
-        const db = event.target.result;
-       // CODE HERE
-      }
+<head>
+  <meta charset="utf-8" />
+  <title>Adding and Getting Data</title>
+</head>
 
-      
-      request.onsuccess = () => {
-        const db = request.result;
-        // CODE HERE
-      };
+<body>
+  <h1>Open Your Developer Tools > Application > indexedDB</h1>
+  <script>
+    const request = indexedDB.open("database", 1);
 
-    </script>
-  </body>
+    //create the table schema
+    request.onupgradeneeded = (event) => {
+      const db = event.target.result;
+      //create an object store with a listID keypath that can be used to query on.
+      const dbStore = db.createObjectStore("table_collection", { keyPath: "listID" });
+      dbStore.createIndex("due_date_index", "due_date");
+    }
+
+
+    request.onsuccess = () => {
+      const db = request.result;
+      const transaction = db.transaction(['table_collection'], 'readwrite');
+      const dbStore = transaction.objectStore('table_collection');
+      const due_date_index = dbStore.index("due_date_index");
+      dbStore.add({ listID: "1", due_date: "4/25/2021" });
+      dbStore.add({ listID: "2", due_date: "4/23/2021" });
+      dbStore.add({ listID: "3", due_date: "4/25/2021" });
+      dbStore.add({ listID: "4", due_date: "4/24/2021" });
+
+      const getRequest = dbStore.get("1");
+        getRequest.onsuccess = () => {
+          console.log(getRequest.result);
+        };
+    }
+  </script>
+</body>
+
 </html>

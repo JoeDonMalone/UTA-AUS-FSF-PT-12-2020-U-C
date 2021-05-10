@@ -9,12 +9,16 @@
   <body>
     <h1>Open Your Developer Tools > Application > IndexedDB</h1>
     <script>
-      const request = window.indexedDB.open("toDoList", 1);
-
+      //create the Database object
+      const request = indexedDB.open("toDoList", 1);
+      //create the collection to store within the database
       request.onupgradeneeded = ({ target }) => {
-        // CODE HERE
+        const db = target.result;
+        const objectStore = db.createObjectStore('to-do-list-One');
+        objectStore.createIndex('ice_box_index_key', 'ice_box_column')
+        objectStore.createIndex('in_progress_index_key', 'in_progress_column')
+        objectStore.createIndex('complete_index_key', 'complete_column')
       };
-
       request.onsuccess = event => {
         console.log(request.result);
       };

@@ -19,7 +19,7 @@ function Contact(props) {
       </p>
       <Link to={`${props.match.url}/learn`} role="button" className="btn btn-link">
         Learn More
-      </Link>{" "}
+      </Link>
       <Link to="/contact" role="button" className="btn btn-link">
         Learn Less
       </Link>

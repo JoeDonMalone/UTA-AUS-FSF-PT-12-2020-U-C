@@ -5,7 +5,11 @@ const config = {
   mode: "development",
 
   // add entry points for JavaScript files for the three pages, home, detail, and favorites.
-  entry: "./public/assets/js/app.js",
+  entry: {
+    home: "./assets/js/index.js",
+    detail: "./assets/js/detail.js"
+  },
+
   output: {
     path: __dirname + "/public/dist",
     filename: "bundle.js"
